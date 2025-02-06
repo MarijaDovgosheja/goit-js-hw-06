@@ -1,22 +1,26 @@
-function filterArray(numbers, value) {
-  // Створюємо порожній масив для збереження чисел, які більші за value
-  const filteredNumbers = [];
-
-  // Ітеруємо кожен елемент масиву numbers
-  for (let i = 0; i < numbers.length; i++) {
-    // Якщо елемент більший за value, додаємо його до filteredNumbers
-    if (numbers[i] > value) {
-      filteredNumbers.push(numbers[i]);
+class StringBuilder {
+    #value
+    constructor(initialValue) {
+         this.#value = initialValue;
     }
-  }
-
-  // Повертаємо новий масив
-  return filteredNumbers;
+    getValue() {
+        return this.#value;
+    }
+    padEnd(str) {
+this.#value += str;
+    }
+    padStart(str) {
+        this.#value = str + this.#value;
+    }
+    padBoth(str) {
+        this.#value = str + this.#value + str;   
+    }
 }
-
-// Перевірка роботи функції
-console.log(filterArray([1, 2, 3, 4, 5], 3)); // [4, 5]
-console.log(filterArray([1, 2, 3, 4, 5], 4)); // [5]
-console.log(filterArray([1, 2, 3, 4, 5], 5)); // []
-console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
-console.log(filterArray([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
